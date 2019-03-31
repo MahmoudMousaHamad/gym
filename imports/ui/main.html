@@ -1,0 +1,23 @@
+<template name="main">
+    <div class="row">
+        {{#if currentUser}}
+            {{#if hasGym}}
+                You already have a gym. See your tools below.
+                {{> userTools}}
+            {{else}}
+                <form class="insert-gym">
+                    <input type="text" name="name" placeholder="Name"/>
+                    <input type="text" name="street" placeholder="Street"/>
+                    <input type="text" name="city" placeholder="City"/>
+                    <input type="text" name="province" placeholder="Province"/>
+                    <input type="text" name="zip" placeholder="Zip"/>
+                    <input type="text" name="country" placeholder="Country"/>
+                    <input type="color" name="brandColor" placeholder="Main Color"/>
+                    <input type="submit" value="Submit" />
+                </form>
+            {{/if}}
+        {{else}}
+            Please login.
+        {{/if}}
+    </div>
+</template>

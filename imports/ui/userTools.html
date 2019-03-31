@@ -1,0 +1,43 @@
+<template name="userTools">
+        <div class="row">
+            <div class="col s12">
+                <a class="waves-effect waves-light btn modal-trigger " href="#modal1">Create new equipment</a>
+            </div>
+            {{#each userTools}}
+                {{> userTool}}
+            {{/each}}
+        </div>
+        <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Create new equipment</h4>
+                <form class="insert-tool">
+                    <input type="text" name="type" placeholder="Type"/>
+                    <input type="text" name="toolNumber" placeholder="Equipment Number"/>
+                    <input type="text" name="location" placeholder="Location"/>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
+    </template>
+        
+<template name="userTool">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-image">
+                <img src="https://images.unsplash.com/photo-1540111970170-b1c4d4fbadaa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&
+                auto=format&fit=crop&w=1050&q=80" />
+                <span class="card-title">{{toolNumber}}</span>
+            </div>
+            <div class="card-content">
+                <p>Equipment #: {{toolNumber}}</p>
+                <p>Location: {{location}}</p>
+            </div>
+            <div class="card-action">
+                <a href="#">Created on: {{formatDate createdAt}}</a>
+            </div>
+        </div>
+    </div>
+</template>

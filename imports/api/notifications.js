@@ -3,7 +3,7 @@ import SimpleSchema from "simpl-schema";
 
 SimpleSchema.extendOptions(['autoforms']);
 
-export const Notifications = new Mongo.Collection('notification');
+export const Notifications = new Mongo.Collection('notifications');
 
 Notifications.allow({
     insert() { return true; },
@@ -15,10 +15,12 @@ var NotificationSchema = new SimpleSchema({
 
     notifierFN:{
         type: String,
+        defaultValue: "not given",
     },
 
     notifierLN:{
         type: String,
+        defaultValue: "not given",
     },
 
     comment:{
@@ -34,6 +36,20 @@ var NotificationSchema = new SimpleSchema({
         defaultValue: false,
     },
 
+    done: {
+        type: Boolean,
+        autoform:{
+            type: 'hidden',
+            label: false,
+        },
+        defaultValue: false,
+    },
+
+    locationByUser: {
+        type: String,
+        autoValue: "not given",
+    },
+
     toolID: {
         type: String,
         autoform:{
@@ -47,13 +63,8 @@ var NotificationSchema = new SimpleSchema({
         }
     },
 
-    done: {
-        type: Boolean,
-        autoform:{
-            type: 'hidden',
-            label: false,
-        },
-        defaultValue: false,
+    gymID: {
+        type: String
     },
 
     createdAt:{

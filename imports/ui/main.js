@@ -80,14 +80,20 @@ Template.userTools.events({
         const toolNumber = target.toolNumber.value;
         const location = target.location.value;
         const gymID = Meteor.user().gymID;
+        var notifications = [];
+
+        notifications.push
 
         Tools.insert({
             _id,
             type,
             toolNumber,
             location,
-            gymID
+            gymID,
+            notifications
         });
+
+        console.log(Tools.findOne({_id: _id}));
 
         target.type.value = "";
         target.toolNumber.value = "";

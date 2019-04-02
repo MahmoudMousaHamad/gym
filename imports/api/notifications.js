@@ -29,19 +29,11 @@ var NotificationSchema = new SimpleSchema({
 
     read: {
         type: Boolean,
-        autoform:{
-            type: 'hidden',
-            label: false,
-        },
         defaultValue: false,
     },
 
     done: {
         type: Boolean,
-        autoform:{
-            type: 'hidden',
-            label: false,
-        },
         defaultValue: false,
     },
 
@@ -52,15 +44,6 @@ var NotificationSchema = new SimpleSchema({
 
     toolID: {
         type: String,
-        autoform:{
-            label: 'Tool',
-            type: 'select',
-            options: function () {
-                return Tools.find().map(function(p) {
-                    return {label: `${p.toolNumber} ${p.type}`, value: p._id};
-                });
-            },
-        }
     },
 
     gymID: {
@@ -69,10 +52,6 @@ var NotificationSchema = new SimpleSchema({
 
     createdAt:{
         type: Date,
-        autoform:{
-            type: 'hidden',
-            label: false,
-        },
         defaultValue: new Date(),
     },
 

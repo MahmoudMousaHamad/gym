@@ -3,7 +3,9 @@ import { Template } from "meteor/templating";
 
 import './body.html';
 import './navigation.html';
+import './error';
 
+import './admin';
 import '../router';
 import './main';
 import '../ui/main.html';

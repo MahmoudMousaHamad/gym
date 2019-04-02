@@ -2,3 +2,32 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+
+.label-checkbox{
+  margin: 0px 10px;
+  float: right !important;
+}
+
+body > div > div:nth-child(1) > nav > div > a {
+  margin-left: 20px;
+}
+
+.card .card-image .card-title{
+  padding: 24px;
+  background-color: #009688;
+}
+
+.parallax-window {
+  min-height: 400px;
+  background: transparent;
+} 
+
+.parallax-container{
+  min-height: 400px;
+  background: transparent;
+  margin: 0px 50px !important;
+}
+
+.remove-tool{
+  margin-right: 20px;
+}

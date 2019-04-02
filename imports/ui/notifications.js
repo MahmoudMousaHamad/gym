@@ -6,21 +6,35 @@ import { Notifications } from "../api/notifications";
 import { Tools } from "../api/tools";
 
 import './notifications.html';
-import './newNotifications.html';
+import './userNotifications.html';
+import { Gyms } from "../api/gyms";
 
-Template.newNotifications.onRendered(function(){
+Template.userNotifications.onRendered(function(){
     $('.collapsible').collapsible();
     $('#modalInsertNotification').modal();
     $('select').css({'display': 'block', 'margin-top': '50px'});
 });
 
-Template.newNotifications.helpers({
-    newNotifications(){
-        return Notifications.find({read: false});
+Template.userNotifications.helpers({
+    userNotifications(){
+        const gymID = Gyms.findOne({ownerID: Meteor.userId()})._id;
+        return Notifications.find({
+            gymID: gymID,
+        }, {
+            sort: {createdAt: -1},
+        });
+    },
+
+    hasNotifications(){
+        return Notifications.find({
+            gymID: Meteor.userId().gymID,
+        }, {
+            sort: {createdAt: -1},
+        }).length != 0;
     },
 });
 
-Template.newNotifications.events({
+Template.userNotifications.events({
     "submit .insert-notification"(event){
         event.preventDefault();
 
@@ -46,10 +60,10 @@ Template.newNotifications.events({
                 'notifications': _id,
             },
         });
-    }
+    },
 });
 
-Template.newNotification.helpers({
+Template.userNotification.helpers({
     returnToolNumber(toolID){
         return Tools.findOne({_id: toolID}).toolNumber;
     },
@@ -57,4 +71,28 @@ Template.newNotification.helpers({
     returnToolType(toolID){
         return Tools.findOne({_id: toolID}).type;
     },
+
+    returnToolLocation(toolID){
+        return Tools.findOne({_id: toolID}).location;
+    },
 });
+
+Template.userNotification.events({
+    'click .mark-read'(event){
+        
+        Notifications.update(this._id, {
+            $set: {
+                read: ! this.read,
+            },
+        });
+    },
+
+    'click .mark-done'(event){
+        
+        Notifications.update(this._id, {
+            $set: {
+                done: ! this.done,
+            },
+        });
+    },
+})

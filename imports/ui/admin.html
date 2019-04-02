@@ -1,0 +1,96 @@
+<template name="admin">
+    <body>
+        <ul class="collapsible" data-collapsible="accordion">
+            {{#each users}}
+                {{> user}}
+            {{/each}}
+        </ul>
+    </body>
+</template>
+
+<template name="user">
+    <li>
+        <div class="collapsible-header">
+            {{returnGymName _id}}, {{returnEmail _id}}
+        </div>
+
+        <div class="collapsible-body">
+            <br>
+            <div class="row">
+                <div class="col s12 m12">
+                    <div class="col s12">
+                        <a class="waves-effect waves-light btn modal-trigger " href="#modalInsertTool">Add equipment</a>
+                    </div>
+                </div>
+                <div id="modalInsertTool" class="modal modal-fixed-footer">
+                    <div class="modal-content">
+                        <h4>Create new equipment</h4>
+                        <form class="insert-tool">
+                            <div class="input-field col s6">
+                                <input id="type" type="text" name="type" class="validate" required>
+                                <label for="type">Equipment type</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="toolNumber" type="text" name="toolNumber" class="validate">
+                                <label for="toolNumber">Equipment number</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="location" type="text" name="location" class="validate" required>
+                                <label for="location">Equipment location</label>
+                            </div>
+        
+                            <div class="input-field col s6">
+                                <input id="code" type="text" name="code" class="validate" required>
+                                <label for="code">Code</label>
+                            </div>
+
+                            <input name="gymID" type="text" value="{{gymID}}" hidden/>
+        
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                        </form>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m12">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        {{#each tools _id}}
+                            {{> tool}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </li>
+</template>
+
+<template name="tool">
+    <li>
+        <div class="collapsible-header">
+            <span class="remove-tool">&#215;</span>
+            {{toolNumber}}, {{type}}
+        </div>
+        <div class="collapsible-body">
+            <form class="update-tool">
+                <div class="input-field">
+                    <input id="type" type="text" name="type" class="validate" value="{{type}}" required>
+                    <label class="active" for="type">Equipment type</label>
+                </div>
+                <div class="input-field">
+                    <input id="toolNumber" type="text" name="toolNumber" class="validate" value="{{toolNumber}}">
+                    <label class="active" for="toolNumber">Equipment number</label>
+                </div>
+                <div class="input-field">
+                    <input id="location"  type="text" name="location" class="validate" value="{{location}}" required>
+                    <label class="active" for="location">Equipment location</label>
+                </div>
+                
+                <div class="input-field">
+                    <input id="code"  type="text" name="code" class="validate" value="{{code}}" required>
+                    <label class="active" for="code">Code</label>
+                </div>
+
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+            </form>
+        </div>
+    </li>
+</template>

@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
 import { Random } from "meteor/random";
+import { ReactiveVar } from 'meteor/reactive-var'
 
 import { Gyms } from "../api/gyms";
 import { Tools } from "../api/tools";
@@ -65,7 +66,9 @@ Template.userTools.onRendered(function() {
 
 Template.userTools.helpers({
     userTools(){
-        return Tools.find({gymID: Meteor.user().gymID});
+        return Tools.find({gymID: Meteor.user().gymID}, {
+            sort: { toolNumber: 1 },
+        });
     },
 });
 
@@ -80,6 +83,7 @@ Template.userTools.events({
         const toolNumber = target.toolNumber.value;
         const location = target.location.value;
         const gymID = Meteor.user().gymID;
+        const code = target.code.value;
         var notifications = [];
 
         notifications.push
@@ -89,14 +93,50 @@ Template.userTools.events({
             type,
             toolNumber,
             location,
+            code,
             gymID,
-            notifications
+            notifications,
         });
-
-        console.log(Tools.findOne({_id: _id}));
 
         target.type.value = "";
         target.toolNumber.value = "";
         target.location.value = "";
-    }
+        target.code.value = "";
+    },
+});
+
+Template.userTool.onCreated(function(){
+    this.editMode = new ReactiveVar(false);
+});
+
+Template.userTool.helpers({
+    editMode(){
+        return Template.instance().editMode.get();
+    },
+});
+
+Template.userTool.events({
+    'click .edit-toggle'(event, template){
+        template.editMode.set(!template.editMode.get());
+    },
+
+    'submit .update-tool'(event, template){
+        event.preventDefault();
+
+        const target = event.target;
+
+        const type = target.type.value;
+        const toolNumber = target.toolNumber.value;
+        const location = target.location.value;
+
+        Tools.update(this._id, {
+            $set: {
+                type,
+                toolNumber,
+                location
+            },
+        });
+
+        template.editMode.set(!template.editMode.get());
+    },
 })

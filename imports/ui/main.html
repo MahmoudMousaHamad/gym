@@ -2,18 +2,46 @@
     <div class="row">
         {{#if currentUser}}
             {{#if hasGym}}
-                You already have a gym. See your tools below.
                 {{> userTools}}
             {{else}}
+                <h3>Add your gym's information:</h3>
                 <form class="insert-gym">
-                    <input type="text" name="name" placeholder="Name"/>
-                    <input type="text" name="street" placeholder="Street"/>
-                    <input type="text" name="city" placeholder="City"/>
-                    <input type="text" name="province" placeholder="Province"/>
-                    <input type="text" name="zip" placeholder="Zip"/>
-                    <input type="text" name="country" placeholder="Country"/>
-                    <input type="color" name="brandColor" placeholder="Main Color"/>
-                    <input type="submit" value="Submit" />
+                    <div class="input-field col s6">
+                        <input id="name" type="text" name="name" class="validate">
+                        <label for="name">Gym name</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="street" type="text" name="street" class="validate">
+                        <label for="name">Street</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="city" type="text" name="city" class="validate">
+                        <label for="city">City</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="province" type="text" name="province" class="validate">
+                        <label for="province">Province</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="zip" type="text" name="zip" class="validate">
+                        <label for="zip">Zip</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="country" type="text" name="country" class="validate">
+                        <label for="country">Country</label>
+                    </div>
+
+                    <div class="col s6">
+                        <label>Brand main color</label>
+                        <br>
+                        <input id="color" type="color" name="brandColor"/>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
                 </form>
             {{/if}}
         {{else}}

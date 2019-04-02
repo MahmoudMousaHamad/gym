@@ -1,0 +1,52 @@
+<template name="userNotifications">  
+    {{#if currentUser}}  
+        {{#if hasNotifications}}
+            <h6>Click on the notification to see more details</h6>
+            <ul class="collapsible" data-collapsible="accordion">
+                {{#each userNotifications}}
+                    {{> userNotification}}
+                {{/each}}
+            </ul>
+        {{else}}
+            <h6>No notifications yet!</h6>
+        {{/if}}
+    {{else}}
+        Please login to continue.
+    {{/if}}
+    </template>
+    
+    <template name="userNotification">
+        <li>
+            <div href="#!" class="collapsible-header">
+                <div>
+                    <p>Comment: {{comment}}</p>
+
+                    <p>Equipment: {{returnToolType toolID}}</p>
+                </div>
+            </div>
+            
+            <div class="collapsible-body">
+                <h5>Details</h5>
+                Comment: {{comment}} <br>
+                <span class="badge" data-badge-caption="">{{formatDate createdAt}}</span>
+                Equipment #: {{returnToolNumber toolID}} <br>
+                Equipment type: {{returnToolType toolID}} <br>
+                Equipment location (by account owner): {{returnToolLocation toolID}} <br>
+                Equipment location (by member): {{locationByUser}} <br>
+                Name of notifier: {{notifierFN}} {{notifierLN}}
+
+                <div>
+                    <label class="label-checkbox">
+                        <input type="checkbox" class="filled-in mark-done" checked="{{done}}"/>
+                        <span>Done</span>
+                    </label>
+
+                    <label class="label-checkbox">     
+                        <input type="checkbox" class="filled-in mark-read" checked="{{read}}"/>
+                        <span>Read</span>
+                    </label>
+                </div>
+            </div>
+        </li>
+        
+    </template>

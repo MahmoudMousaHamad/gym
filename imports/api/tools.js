@@ -27,6 +27,10 @@ var ToolSchema = new SimpleSchema({
         type: String,
     },
 
+    code: {
+        type: String,
+    },
+
     gymID: { 
         type: String,
         optional: true,

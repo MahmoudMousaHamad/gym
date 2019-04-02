@@ -1,7 +1,7 @@
 <template name="userTools">
         <div class="row">
             <div class="col s12">
-                <a class="waves-effect waves-light btn modal-trigger " href="#modal1">Create new equipment</a>
+                <a class="waves-effect waves-light btn modal-trigger " href="#modal1">Add equipment</a>
             </div>
             {{#each userTools}}
                 {{> userTool}}
@@ -11,10 +11,25 @@
             <div class="modal-content">
                 <h4>Create new equipment</h4>
                 <form class="insert-tool">
-                    <input type="text" name="type" placeholder="Type"/>
-                    <input type="text" name="toolNumber" placeholder="Equipment Number"/>
-                    <input type="text" name="location" placeholder="Location"/>
-                    <input type="submit" value="Submit" />
+                    <div class="input-field col s6">
+                        <input id="type" type="text" name="type" class="validate" required>
+                        <label for="type">Equipment type</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="toolNumber" type="text" name="toolNumber" class="validate">
+                        <label for="toolNumber">Equipment number</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="location" type="text" name="location" class="validate" required>
+                        <label for="location">Equipment location</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                        <input id="code" type="text" name="code" class="validate" required>
+                        <label for="code">Code</label>
+                    </div>
+
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -25,18 +40,39 @@
         
 <template name="userTool">
     <div class="col s6">
-        <div class="card">
+        <div class="card hoverable">
             <div class="card-image">
-                <img src="https://images.unsplash.com/photo-1540111970170-b1c4d4fbadaa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&
-                auto=format&fit=crop&w=1050&q=80" />
-                <span class="card-title">{{toolNumber}}</span>
+                <img src="https://png2.kisspng.com/sh/123a14555f3276063479a863bfb1e406/L0KzQYm3UsI3N6txiZH0aYP2gLBuTfV5baNogeVuLXX0hbr3jfVvfF5qjdV1aXTocbA0lvVkfJD3RehuY4Tygn7tigRvbaR4RdVqcj24cYq7V8Y1Omg9eaZvNj60RYW5VMUxO2I6SasBN0mzRIO7WcQzNqFzf3==/kisspng-exercise-equipment-euclidean-vector-vector-fitness-car-5a94764278a4f6.1542450315196790424942.png" />
+                <span class="card-title">#{{toolNumber}}, {{type}}</span>
             </div>
             <div class="card-content">
-                <p>Equipment #: {{toolNumber}}</p>
-                <p>Location: {{location}}</p>
+                {{#if editMode}}
+                    <h6>Edit this equipment:</h6>
+                    <form class="update-tool">
+                        <div class="input-field">
+                            <input id="type" type="text" name="type" class="validate" value="{{type}}" required>
+                            <label class="active" for="type">Equipment type</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="toolNumber" type="text" name="toolNumber" class="validate" value="{{toolNumber}}">
+                            <label class="active" for="toolNumber">Equipment number</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="location"  type="text" name="location" class="validate" value="{{location}}" required>
+                            <label class="active" for="location">Equipment location</label>
+                        </div>
+                        
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                    </form>
+                {{else}}
+                    <p class="truncate">Type: {{type}}</p>
+                    <p class="truncate">Number: {{toolNumber}}</p>
+                    <p class="truncate">Location: {{location}}</p>
+                    <p class="truncate">Code: {{code}}</p>
+                {{/if}}
             </div>
             <div class="card-action">
-                <a href="#">Created on: {{formatDate createdAt}}</a>
+                <a href="#" class="edit-toggle">Edit</a>
             </div>
         </div>
     </div>

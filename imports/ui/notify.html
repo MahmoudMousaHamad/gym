@@ -1,5 +1,15 @@
+<template name="outsideUserlayout">
+    <body>
+        <div class="container">
+            <div class="row">
+                {{> yield}}
+            </div>
+        </div>
+    </body>
+</template>
+
 <template name="notify">
-    <h4>Notify {{gymName}} staff</h4>
+    <h4>Notify {{gymName}}'s staff</h4>
     <form class="notify">
         <input name="comment" type="text" placeholder="Comment" required/>
         <input name="locationByUser" type="text" placeholder="Where's the equipment in the gym?"/>
@@ -7,4 +17,10 @@
         <input name="notifierLN" type="text" placeholder="Last Name (optional)" />
         <input type="submit" value="Submit" />
     </form>
+</template>
+
+<template name="staffNotified">
+    <h4>Thank you for your input</h4>
+    <p>We'll use your comment to make the gym better</p>
+    <p>Here's your comment: {{comment}}</p>
 </template>

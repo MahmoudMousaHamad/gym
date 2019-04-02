@@ -1,12 +1,14 @@
 <template name="navigation">
     <nav>
         <div class="nav-wrapper teal">
-            <a href="#" class="brand-logo">Notify Staff</a>
+            <a href="/" class="brand-logo">Notify Staff</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>{{> loginButtons}}</li>
-                <li><a href="/">Home</a></li>
-                <li><a href="/newNotifications">Unread Notifications</a></li>
-                <li><a href="/gyms">Gyms</a></li>
+                {{#if currentUser}}
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/notifications">Notifications</a></li>
+                    <li><a href="/admin">Admin</a></li>
+                {{/if}}
             </ul>
         </div>
     </nav>

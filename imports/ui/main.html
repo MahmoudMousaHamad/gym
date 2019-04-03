@@ -1,48 +1,52 @@
 <template name="main">
     <div class="row">
         {{#if currentUser}}
-            {{#if hasGym}}
-                {{> userTools}}
+            {{#if isActive}}
+                {{#if hasGym}}
+                    {{> userTools}}
+                {{else}}
+                    <h3>Add your gym's information:</h3>
+                    <form class="insert-gym">
+                        <div class="input-field col s6">
+                            <input id="name" type="text" name="name" class="validate">
+                            <label for="name">Gym name</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input id="street" type="text" name="street" class="validate">
+                            <label for="name">Street</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input id="city" type="text" name="city" class="validate">
+                            <label for="city">City</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input id="province" type="text" name="province" class="validate">
+                            <label for="province">Province</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input id="zip" type="text" name="zip" class="validate">
+                            <label for="zip">Zip</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <input id="country" type="text" name="country" class="validate">
+                            <label for="country">Country</label>
+                        </div>
+
+                        <div class="col s6">
+                            <label>Brand main color</label>
+                            <br>
+                            <input id="color" type="color" name="brandColor"/>
+                        </div>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                    </form>
+                {{/if}}
             {{else}}
-                <h3>Add your gym's information:</h3>
-                <form class="insert-gym">
-                    <div class="input-field col s6">
-                        <input id="name" type="text" name="name" class="validate">
-                        <label for="name">Gym name</label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <input id="street" type="text" name="street" class="validate">
-                        <label for="name">Street</label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <input id="city" type="text" name="city" class="validate">
-                        <label for="city">City</label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <input id="province" type="text" name="province" class="validate">
-                        <label for="province">Province</label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <input id="zip" type="text" name="zip" class="validate">
-                        <label for="zip">Zip</label>
-                    </div>
-
-                    <div class="input-field col s6">
-                        <input id="country" type="text" name="country" class="validate">
-                        <label for="country">Country</label>
-                    </div>
-
-                    <div class="col s6">
-                        <label>Brand main color</label>
-                        <br>
-                        <input id="color" type="color" name="brandColor"/>
-                    </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
-                </form>
+                <h5>Your account is inactive</h5>
             {{/if}}
         {{else}}
             Please login.

@@ -13,6 +13,11 @@ import './userTools.html';
 Template.main.helpers({
     hasGym() {
         return Meteor.user().gymID != null;
+    },
+
+    isActive(){
+        console.log(Meteor.user());
+        return Meteor.user().active;
     }
 })
 
@@ -45,6 +50,8 @@ Template.main.events({
         });
 
         Meteor.call('users.update.gymID', _id);
+
+        Meteor.call('users.update.setActive', false);
 
         console.log("successfully submitted gym");
 

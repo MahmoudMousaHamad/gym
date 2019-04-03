@@ -2,15 +2,17 @@ import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
 
 import './body.html';
-import './navigation.html';
-import './error';
-
-import './admin';
-import '../router';
 import './main';
-import '../ui/main.html';
-import './gyms';
+import './navigation.html';
+import './userNotifications.html';
+import './admin.html';
+import './outsideUserLayout.html';
+import "./error.html";
+import './notify.html';
+import '../router';
+
 import './notifications';
+import './admin';
 import './notify';
 
 Template.registerHelper('formatDate', function(date){

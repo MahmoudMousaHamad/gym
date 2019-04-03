@@ -7,5 +7,13 @@ Meteor.methods({
                 gymID: gymID,
             },
         });
-    }, 
+    },
+    
+    'users.update.setActive'(bool) {
+        Users.update({ _id: this.userId }, {
+            $set: {
+                active: bool,
+            },
+        });
+    }
 });

@@ -18,11 +18,8 @@
     <template name="userNotification">
         <li>
             <div href="#!" class="collapsible-header">
-                <div>
-                    <p>Comment: {{comment}}</p>
-
-                    <p>Equipment: {{returnToolType toolID}}</p>
-                </div>
+                {{comment}} <br>
+                Equipment: #{{returnToolNumber toolID}}, {{returnToolType toolID}}
             </div>
             
             <div class="collapsible-body">

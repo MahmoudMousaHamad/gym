@@ -1,10 +1,10 @@
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
+import { Random } from "meteor/random";
 
 import { Gyms } from "../api/gyms";
 import { Tools } from "../api/tools";
-
-import './admin.html';
+import { Notifications } from "../api/notifications";
 
 
 Template.admin.onCreated(function(){
@@ -77,5 +77,63 @@ Template.user.events({
         target.toolNumber.value = "";
         target.location.value = "";
         target.code.value = "";
+    },
+
+    'click .update-active'(){
+        Meteor.users.update(Meteor.userId(), {
+            $set: {
+                active: !Meteor.user().active,
+            },
+        });
+    },
+});
+
+Template.tool.onRendered(function(){
+    $('.collapsible').collapsible();
+});
+
+Template.tool.helpers({
+    notifications(toolID){
+        return Notifications.find({toolID: toolID});
+    },
+});
+
+Template.tool.events({
+    'submit .update-tool'(event){
+        event.preventDefault();
+
+        const target = event.target;
+
+        const type = target.type.value;
+        const toolNumber = target.toolNumber.value;
+        const location = target.location.value;
+        const code = target.code.value;
+
+        Tools.update(this._id, {
+            $set: {
+                type,
+                toolNumber,
+                location,
+                code
+            },
+        });
+    },
+
+    'click .remove-tool'(){
+        Tools.remove(this._id);
+    }
+})
+
+Template.toolNotification.helpers({
+    returnToolNumber(toolID){
+        return Tools.findOne({_id: toolID}).toolNumber;
+    },
+
+    returnToolType(toolID){
+        return Tools.findOne({_id: toolID}).type;
+    },
+
+    returnToolLocation(toolID){
+        return Tools.findOne({_id: toolID}).location;
     },
 });

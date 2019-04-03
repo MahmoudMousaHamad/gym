@@ -11,11 +11,18 @@
 <template name="user">
     <li>
         <div class="collapsible-header">
+            <span>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" class="update-active" checked="{{active}}">
+                        <span class="lever"></span>
+                    </label>
+                </div>                        
+            </span>
             {{returnGymName _id}}, {{returnEmail _id}}
         </div>
 
         <div class="collapsible-body">
-            <br>
             <div class="row">
                 <div class="col s12 m12">
                     <div class="col s12">
@@ -49,6 +56,7 @@
                             <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
                         </form>
                     </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col s12 m12">
@@ -91,6 +99,43 @@
 
                 <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
             </form>
+            <ul class="collapsible" data-collapsible="accordion">
+                {{#each notifications _id}}
+                    {{> toolNotification}}
+                {{/each}}
+            </ul>
+        </div>
+    </li>
+</template>
+
+<template name="toolNotification">
+    <li>
+        <div href="#!" class="collapsible-header">
+            {{comment}} <br>
+            Equipment: #{{returnToolNumber toolID}}, {{returnToolType toolID}}
+        </div>
+        
+        <div class="collapsible-body">
+            <h5>Notification details</h5>
+            Comment: {{comment}} <br>
+            <span class="badge" data-badge-caption="">{{formatDate createdAt}}</span>
+            Equipment #: {{returnToolNumber toolID}} <br>
+            Equipment type: {{returnToolType toolID}} <br>
+            Equipment location (by account owner): {{returnToolLocation toolID}} <br>
+            Equipment location (by member): {{locationByUser}} <br>
+            Name of notifier: {{notifierFN}} {{notifierLN}}
+
+            <div>
+                <label class="label-checkbox">
+                    <input type="checkbox" class="filled-in mark-done" checked="{{done}}" disabled/>
+                    <span>Done</span>
+                </label>
+
+                <label class="label-checkbox">     
+                    <input type="checkbox" class="filled-in mark-read" checked="{{read}}" disabled/>
+                    <span>Read</span>
+                </label>
+            </div>
         </div>
     </li>
 </template>

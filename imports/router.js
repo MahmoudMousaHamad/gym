@@ -8,7 +8,7 @@ Router.route('/', function(){
 });
 
 Router.route('/error', function(){
-    this.layout('outsideUserlayout');
+    this.layout('outsideUserLayout');
     this.render('error');
 });
 
@@ -21,7 +21,7 @@ Router.route('/:gymID/:toolID/notify/', function(){
     var gymID = this.params.gymID;
     var toolID = this.params.gymID;
 
-    this.layout('outsideUserlayout');
+    this.layout('outsideUserLayout');
     this.render('notify');
 });
 

@@ -51,12 +51,6 @@ Template.main.events({
 
         Meteor.call('users.update.gymID', _id);
 
-        Meteor.call('users.update.setActive', false);
-
-        console.log("successfully submitted gym");
-
-        console.log(Meteor.user());
-
         target.name.value = '';
         target.street.value = '';
         target.city.value = '';

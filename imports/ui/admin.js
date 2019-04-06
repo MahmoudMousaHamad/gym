@@ -25,7 +25,7 @@ Template.admin.helpers({
                 createdAt: -1,
             },
         });
-    }
+    },
 });
 
 Template.user.onRendered(function(){
@@ -90,9 +90,13 @@ Template.user.events({
 
 Template.tool.onRendered(function(){
     $('.collapsible').collapsible();
+
 });
 
 Template.tool.helpers({
+    returnNotifyLink(){ 
+        return `https://notifystaff-6586.nodechef.com/${this.gymID}/${this._id}/notify`;
+    },
     notifications(toolID){
         return Notifications.find({toolID: toolID});
     },
